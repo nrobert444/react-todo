@@ -2,7 +2,7 @@ import React from 'react';
 import TodoApp from './TodoApp.js';
 import './App.css';
 import { 
-    BrowserRouter, 
+    BrowserRouter as Router, 
     Route, 
     Switch,
  } from 'react-router-dom';
@@ -14,16 +14,14 @@ function App() {
         <header>
             my header
         </header>
-        <BrowserRouter>
+        <Router>
             <Switch>
                 <Route exact path="/" component={ TodoApp }/>
             </Switch>
-        </BrowserRouter>
+        </Router>
 
     </div>
   );
 }
-
-export default App;
 
 export default App;

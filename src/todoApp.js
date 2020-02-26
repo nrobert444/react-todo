@@ -5,7 +5,7 @@ import request from 'superagent';
 export default class TodoApp extends Component {
     state = { todos: [] }
     componentDidMount = async() => {
-        const todos = await request.get('http://localhost:5000/api/todos')
+        const todos = await request.get('https://nameless-brushlands-64319.herokuapp.com/api/todos')
 
         console.log(todos.body)
         this.setState({ todos: todos.body })
@@ -22,7 +22,7 @@ export default class TodoApp extends Component {
         const newTodos = [...this.state.todos, newTodo];
 
         this.setState({ todos: newTodos });
-        const data = await request.post('http://localhost:5000/api/todos', {
+        const data = await request.post('https://nameless-brushlands-64319.herokuapp.com/api/todos', {
             task: this.state.todoInput
         });
     }
@@ -51,7 +51,7 @@ export default class TodoApp extends Component {
                         matchingTodo.complete = !todo.complete
                                  
                         this.setState({ todos: newTodos });
-                        const data = await request.put(`http://localhost:5000/api/todos/${todo.id}`, matchingTodo);
+                        const data = await request.put(`https://nameless-brushlands-64319.herokuapp.com/api/todos/${todo.id}`, matchingTodo);
                     }} key={todo.id}>
                         {todo.task}
                     </p>)
