@@ -1,4 +1,4 @@
-import React from 'react';
+import React { Component } from 'react';
 import TodoApp from './todoApp.js';
 import './App.css';
 import { 
@@ -8,20 +8,20 @@ import {
  } from 'react-router-dom';
 
 
-function App() {
-  return (
-    <div className="App">
-        <header>
-            my header
-        </header>
-        <Router>
-            <Switch>
-                <Route exact path="/" component={ TodoApp }/>
-            </Switch>
-        </Router>
+ export default class App extends Component {
+   render () {
+    return (
+      <div className="App">
+          <header>
+              my header
+          </header>
+          <Router>
+              <Switch>
+                  <Route exact path="/" component={ TodoApp }/>
+              </Switch>
+          </Router>
+      </div>
+    );
+  }
+};
 
-    </div>
-  );
-}
-
-export default App;

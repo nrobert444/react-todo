@@ -7,7 +7,6 @@ export default class TodoApp extends Component {
     componentDidMount = async() => {
         const todos = await request.get('https://nameless-brushlands-64319.herokuapp.com/api/todos')
 
-        console.log(todos.body)
         this.setState({ todos: todos.body })
     }
 
