@@ -5,10 +5,14 @@ import request from 'superagent';
 export default class TodoApp extends Component {
     state = { todos: [] }
     componentDidMount = async() => {
+        await this.reloadTodos();
+    }
+
+    reloadTodos = async() => {
         const todos = await request.get('https://nameless-brushlands-64319.herokuapp.com/api/todos')
 
         this.setState({ todos: todos.body })
-    }
+    };
 
     handleClick = async () => {
         const newTodo = {
@@ -18,6 +22,7 @@ export default class TodoApp extends Component {
             complete: false,
         };
 
+
         const newTodos = [...this.state.todos, newTodo];
 
         this.setState({ todos: newTodos });
@@ -26,18 +31,19 @@ export default class TodoApp extends Component {
         });
     }
 
+
     handleInput = (e) => { this.setState({ todoInput: e.target.value })};
     
     render() {
         return (
-            <div>
+            <div className = 'todo-container'>
                 <AddTodo 
                 todoInput={ this.state.todoInput } 
                 handleClick={ this.handleClick } 
                 handleInput={ this.handleInput } 
             />
                 {
-                    this.state.todos.map((todo) => <p 
+                    this.state.todos.map((todo, index) => <p className='todo-item'
                         style={{
                             textDecoration: todo.complete ? 'line-through' : 'none'
                         }}
@@ -53,6 +59,12 @@ export default class TodoApp extends Component {
                         const data = await request.put(`https://nameless-brushlands-64319.herokuapp.com/api/todos/${todo.id}`, matchingTodo);
                     }} key={todo.id}>
                         {todo.task}
+                            <button className= 'myButton' onClick={async () => { 
+                                await request.delete(`https://nameless-brushlands-64319.herokuapp.com/api/todos/${todo.id}`)
+                                const deletedTodos = this.state.todos.slice();
+                                deletedTodos.splice(index, 1);
+                                this.setState({ todos: deletedTodos});
+                            }}>Delete</button>
                     </p>)
                 }
             </div>

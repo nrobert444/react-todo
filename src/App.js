@@ -1,4 +1,4 @@
-import React { Component } from 'react';
+import React, { Component } from 'react';
 import TodoApp from './todoApp.js';
 import './App.css';
 import { 
@@ -13,7 +13,7 @@ import {
     return (
       <div className="App">
           <header>
-              my header
+              My Todo List App
           </header>
           <Router>
               <Switch>
