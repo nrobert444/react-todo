@@ -13,7 +13,7 @@ import {
  export default class App extends Component {
    render () {
     return (
-      <div className="App">
+      <div className='App'>
           <header>
               My Todo List App
           </header>
@@ -23,7 +23,7 @@ import {
                     ? <TodoApp />
                     : <Redirect to='login' />
                 }/>
-                  <Route exact path="/login" component={ TodoAppLogin } />
+                  <Route exact path='/login' component={ TodoAppLogin } />
           </Router>
       </div>
     );

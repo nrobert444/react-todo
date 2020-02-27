@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import request from 'superagent'
 
-export default class todoAppLogin extends Component {
+export default class TodoAppLogin extends Component {
 
     state = { 
-                usernameSignIn:'',
-                usernameSignUp:'',
-                passwordSignIn:'',
-                passwordSignUp:''
+                usernameSignIn: '',
+                usernameSignUp: '',
+                passwordSignIn: '',
+                passwordSignUp: '',
             }
 
             handleSignIn = async() => {
@@ -29,12 +29,14 @@ export default class todoAppLogin extends Component {
 
     render() {
         return (
-            <div>
-                login 
-                <input value={this.state.usernameSignUp} onChange={ (e) => this.setState({ usernameSignup: e.target.value})} />
-                <input value={this.state.passwordSignUp} onChange={ (e) => this.setState({ passwordSignUp: e.target.value})} />
+            <div> 
+                Login Page
                 <br/>
+                <input value={this.state.usernameSignUp} onChange={ (e) => this.setState({ usernameSignUp: e.target.value})} />
+                <input value={this.state.passwordSignUp} onChange={ (e) => this.setState({ passwordSignUp: e.target.value})} />
                 <button onClick={this.handleSignUp}>Sign Up</button>
+                <br/>
+                <br/>
                 <input value={this.state.usernameSignIn} onChange={ (e) => this.setState({ usernameSignIn: e.target.value})} />
                 <input value={this.state.passwordSignIn} onChange={ (e) => this.setState({ passwordSignIn: e.target.value})} />
                 <button onClick={this.handleSignIn}>Sign In</button>

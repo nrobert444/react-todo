@@ -56,9 +56,12 @@ export default class TodoApp extends Component {
                         const matchingTodo = newTodos.find((thisTodo) => todo.id === thisTodo.id);
 
                         matchingTodo.complete = !todo.complete
+
+                        const user = JSON.parse(localStorage.getItem('user'));
                                  
                         this.setState({ todos: newTodos });
-                        const data = await request.put(`https://nameless-brushlands-64319.herokuapp.com/api/todos/${todo.id}`, matchingTodo);
+                        const data = await request.put(`https://nameless-brushlands-64319.herokuapp.com/api/todos/${todo.id}`, matchingTodo)
+                        .set('Authorization', user.token);
                     }} key={todo.id}>
                         {todo.task}
                             <button className= 'myButton' onClick={async () => { 
