@@ -65,7 +65,9 @@ export default class TodoApp extends Component {
                     }} key={todo.id}>
                         {todo.task}
                             <button className= 'myButton' onClick={async () => { 
+                                const user = JSON.parse(localStorage.getItem('user'));
                                 await request.delete(`https://nameless-brushlands-64319.herokuapp.com/api/todos/${todo.id}`)
+                                .set('Authorization', user.token);
                                 const deletedTodos = this.state.todos.slice();
                                 deletedTodos.splice(index, 1);
                                 this.setState({ todos: deletedTodos});
