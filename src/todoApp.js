@@ -5,14 +5,11 @@ import request from 'superagent';
 export default class TodoApp extends Component {
     state = { todos: [] }
     componentDidMount = async() => {
-        await this.reloadTodos();
-    }
-
-    reloadTodos = async() => {
+        const user = JSON.parse(localStorage.getItem('user'));
         const todos = await request.get('https://nameless-brushlands-64319.herokuapp.com/api/todos')
-
+        .set('Authorization', user.token);
         this.setState({ todos: todos.body })
-    };
+    }
 
     handleClick = async () => {
         const newTodo = {
@@ -22,26 +19,31 @@ export default class TodoApp extends Component {
             complete: false,
         };
 
+        const user = JSON.parse(localStorage.getItem('user'));
 
         const newTodos = [...this.state.todos, newTodo];
 
         this.setState({ todos: newTodos });
         const data = await request.post('https://nameless-brushlands-64319.herokuapp.com/api/todos', {
             task: this.state.todoInput
-        });
+        })
+        .set('Authorization', user.token);
+
     }
 
 
     handleInput = (e) => { this.setState({ todoInput: e.target.value })};
     
     render() {
+        if (localStorage.getItem('user')) {
         return (
             <div className = 'todo-container'>
+                <h3>Hello {JSON.parse(localStorage.getItem('user')).email}</h3>
                 <AddTodo 
                 todoInput={ this.state.todoInput } 
                 handleClick={ this.handleClick } 
                 handleInput={ this.handleInput } 
-            />
+                />
                 {
                     this.state.todos.map((todo, index) => <p className='todo-item'
                         style={{
@@ -68,7 +70,8 @@ export default class TodoApp extends Component {
                     </p>)
                 }
             </div>
-        )
+            )
+        }
     }
-}
+}   
 

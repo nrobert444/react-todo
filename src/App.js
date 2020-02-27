@@ -4,9 +4,11 @@ import './App.css';
 import { 
     BrowserRouter as Router, 
     Route, 
-    Switch,
+    Redirect,
  } from 'react-router-dom';
+ import TodoAppLogin from './todoAppLogin.js';
 
+ const isLoggedIn = () => JSON.parse(localStorage.getItem('user'));
 
  export default class App extends Component {
    render () {
@@ -16,9 +18,12 @@ import {
               My Todo List App
           </header>
           <Router>
-              <Switch>
-                  <Route exact path="/" component={ TodoApp }/>
-              </Switch>
+              <Route path='/' render={() => 
+                isLoggedIn() 
+                    ? <TodoApp />
+                    : <Redirect to='login' />
+                }/>
+                  <Route exact path="/login" component={ TodoAppLogin } />
           </Router>
       </div>
     );
